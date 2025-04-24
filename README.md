@@ -86,9 +86,6 @@ Backend → `http://localhost:5000`
 
 ---
 
-## 📸 Screenshots
-
-> Add UI previews of the dashboard, form, and certificate viewer here!
 
 ---
 
