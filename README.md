@@ -39,3 +39,12 @@ A modern full-stack web application for managing student internships. Built for 
 ```bash
 git clone https://github.com/your-username/internship-portal.git
 cd internship-portal
+```
+
+
+
+```bash
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+```
