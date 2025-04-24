@@ -21,7 +21,7 @@ const AuthForm = ({ type }: { type: 'login' | 'register' }) => {
       } else {
         const { data } = await login(formData);
         localStorage.setItem('token', data.token);
-        navigate(data.user.role === 'teacher' ? '/teacher-dashboard' : '/student-dashboard');
+        navigate(data.user.role === 'teacher' ? '/teacher-dashboard' : '/add-internship');
       }
     } catch (err) {
       setError('Something went wrong!');
