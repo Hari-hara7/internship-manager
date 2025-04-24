@@ -41,8 +41,11 @@ A modern full-stack web application for managing student internships. Designed f
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/internship-portal.git
-cd internship-portal
+git clone https://github.com/Hari-hara7/internship-manager.git
+npm i
+cd  frontend
+cd app
+npm run dev
 ```
 
 ---
@@ -52,6 +55,9 @@ cd internship-portal
 ```bash
 cd backend
 npm install
+npm i
+node server.js
+
 ```
 
 Create a `.env` file in the `backend` directory:
@@ -65,18 +71,12 @@ JWT_SECRET=your_jwt_secret
 Start the backend server:
 
 ```bash
-npm run dev
+node server.js
 ```
 
 ---
 
-### 3. Frontend Setup
 
-```bash
-cd ../frontend
-npm install
-npm run dev
-```
 
 ---
 
