@@ -1,9 +1,9 @@
 
-# 🧠 Internship Management Portal
+#  Internship Management Portal
 
 A modern full-stack web application for managing student internships. Designed for teachers and administrators to efficiently **view**, **update**, and **manage** internship records, including **certificate uploads**.
+>  Developed with 💛 by **Hari**
 
-> 💛 Developed with love by **Hari**
 
 ---
 
@@ -107,3 +107,5 @@ Licensed under the [MIT License](LICENSE).
 ⭐ **Feel free to star the repo if you find it helpful!**  
 📬 Reach out on [LinkedIn](https://linkedin.com/in/your-link) or [Email](mailto:you@example.com)
 ```
+
+>  Developed with 💛 by **Hari**
