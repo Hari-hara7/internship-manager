@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { updateInternship, deleteInternship } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
+import { updateInternship, deleteInternship } from '../utils/api';
+
 import { Pencil, Trash2, FileText } from 'lucide-react';
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 const InternshipList = ({ internships }: { internships: any[] }) => {
   const [error, setError] = useState('');
@@ -14,7 +18,7 @@ const InternshipList = ({ internships }: { internships: any[] }) => {
       alert('Internship deleted successfully');
       window.location.reload();
     } catch (err) {
-      setError('Failed to delete internship');
+      setError('❌ Failed to delete internship.');
     }
   };
 
@@ -23,60 +27,58 @@ const InternshipList = ({ internships }: { internships: any[] }) => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="grid gap-6">
       {internships.map((internship) => (
-        <div
+        <Card
           key={internship._id}
-          className="p-6 bg-white border border-gray-200 rounded-xl shadow-md transition hover:shadow-lg"
+          className="bg-white dark:bg-zinc-900 rounded-2xl shadow-lg hover:shadow-xl transition"
         >
-          <h3 className="text-xl font-bold text-gray-800 mb-2">{internship.title}</h3>
+          <CardContent className="p-6 space-y-3">
+            <h3 className="text-xl font-semibold text-zinc-900 dark:text-white">
+              {internship.title}
+            </h3>
 
-          {/* New: Posted by user */}
-     
+            <div className="text-sm text-muted-foreground space-y-1">
+              <p><strong>Company:</strong> {internship.companyName}</p>
+              <p><strong>Mentor:</strong> {internship.mentorName}</p>
+              <p><strong>Description:</strong> {internship.description}</p>
+              <p><strong>Start Date:</strong> {new Date(internship.startDate).toLocaleDateString()}</p>
+              <p><strong>End Date:</strong> {new Date(internship.endDate).toLocaleDateString()}</p>
+              <p>
+                <strong>Status:</strong>{' '}
+                <Badge variant="outline" className="capitalize">{internship.status}</Badge>
+              </p>
+            </div>
 
-          <p className="text-sm text-gray-600 mb-1">
-            <strong>Company:</strong> {internship.companyName}
-          </p>
-          <p className="text-sm text-gray-600 mb-1">
-            <strong>Mentor:</strong> {internship.mentorName}
-          </p>
-          <p className="text-sm text-gray-600 mb-1">
-            <strong>Description:</strong> {internship.description}
-          </p>
-          <p className="text-sm text-gray-600 mb-1">
-            <strong>Start Date:</strong> {new Date(internship.startDate).toLocaleDateString()}
-          </p>
-          <p className="text-sm text-gray-600 mb-1">
-            <strong>End Date:</strong> {new Date(internship.endDate).toLocaleDateString()}
-          </p>
-          <p className="text-sm text-gray-600 mb-3">
-            <strong>Status:</strong> {internship.status}
-          </p>
-
-          <a
-            href={internship.certificateUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm text-blue-600 hover:underline"
-          >
-            <FileText className="w-4 h-4" /> View Certificate
-          </a>
-
-          <div className="flex justify-end gap-3 mt-4">
-            <button
-              onClick={() => handleEdit(internship._id)}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-black text-white rounded hover:bg-gray-800"
+            <a
+              href={internship.certificateUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-blue-600 hover:underline mt-2"
             >
-              <Pencil className="w-4 h-4" /> Edit
-            </button>
-            <button
-              onClick={() => handleDelete(internship._id)}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-            >
-              <Trash2 className="w-4 h-4" /> Delete
-            </button>
-          </div>
-        </div>
+              <FileText className="w-4 h-4" /> View Certificate
+            </a>
+
+            <div className="flex justify-end gap-3 pt-4">
+              <Button
+                variant="default"
+                size="sm"
+                className="flex gap-2 items-center bg-black hover:bg-zinc-800"
+                onClick={() => handleEdit(internship._id)}
+              >
+                <Pencil className="w-4 h-4" /> Edit
+              </Button>
+              <Button
+                variant="destructive"
+                size="sm"
+                className="flex gap-2 items-center"
+                onClick={() => handleDelete(internship._id)}
+              >
+                <Trash2 className="w-4 h-4" /> Delete
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       ))}
       {error && <p className="text-red-600 text-center mt-4">{error}</p>}
     </div>
@@ -84,3 +86,4 @@ const InternshipList = ({ internships }: { internships: any[] }) => {
 };
 
 export default InternshipList;
+

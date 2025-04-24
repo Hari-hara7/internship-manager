@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import InternshipList from '../components/InternshipList';
 import { LayoutDashboard } from 'lucide-react';
 
+import { Card, CardContent } from '@/components/ui/card';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Separator } from '@/components/ui/separator';
+
 const TeacherDashboard = () => {
   const [internships, setInternships] = useState<any[]>([]);
   const [error, setError] = useState<string>('');
@@ -26,22 +30,30 @@ const TeacherDashboard = () => {
     };
 
     fetchInternships();
-  }, [token, navigate]); // fixed: removed `history` which is not defined
+  }, [token, navigate]);
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
-      <div className="flex items-center gap-2 mb-6">
-        <LayoutDashboard className="w-6 h-6 text-indigo-600" />
-        <h2 className="text-2xl font-bold text-gray-800">All Internships</h2>
-      </div>
+    <div className="max-w-5xl mx-auto px-6 py-8">
+      <Card>
+        <CardContent className="p-6">
+          <div className="flex items-center gap-3 mb-4">
+            <LayoutDashboard className="w-6 h-6 text-indigo-600" />
+            <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">
+              All Internships
+            </h2>
+          </div>
+          <Separator className="mb-6" />
 
-      {error && (
-        <div className="mb-4 p-4 bg-red-100 text-red-700 border border-red-300 rounded">
-          {error}
-        </div>
-      )}
+          {error && (
+            <Alert variant="destructive" className="mb-6">
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
 
-      <InternshipList internships={internships} />
+          <InternshipList internships={internships} />
+        </CardContent>
+      </Card>
     </div>
   );
 };

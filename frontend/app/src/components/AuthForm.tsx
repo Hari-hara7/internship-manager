@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register, login } from '../utils/api';
 import { User, Mail, Lock, UserCheck } from 'lucide-react';
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 
 const AuthForm = ({ type }: { type: 'login' | 'register' }) => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '', role: '' });
@@ -10,6 +13,10 @@ const AuthForm = ({ type }: { type: 'login' | 'register' }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleRoleChange = (value: string) => {
+    setFormData(prev => ({ ...prev, role: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -36,65 +43,56 @@ const AuthForm = ({ type }: { type: 'login' | 'register' }) => {
       {error && <p className="text-red-600 text-center mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         {type === 'register' && (
-          <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2">
-            <User className="text-gray-500 mr-2" size={20} />
-            <input
-              type="text"
+          <div className="flex items-center gap-2">
+            <User className="text-gray-500" size={20} />
+            <Input
               name="name"
               value={formData.name}
               onChange={handleChange}
               placeholder="Full Name"
-              className="w-full focus:outline-none"
               required
             />
           </div>
         )}
-        <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2">
-          <Mail className="text-gray-500 mr-2" size={20} />
-          <input
+        <div className="flex items-center gap-2">
+          <Mail className="text-gray-500" size={20} />
+          <Input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             placeholder="Email"
-            className="w-full focus:outline-none"
             required
           />
         </div>
-        <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2">
-          <Lock className="text-gray-500 mr-2" size={20} />
-          <input
+        <div className="flex items-center gap-2">
+          <Lock className="text-gray-500" size={20} />
+          <Input
             type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
             placeholder="Password"
-            className="w-full focus:outline-none"
             required
           />
         </div>
         {type === 'register' && (
-          <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2">
-            <UserCheck className="text-gray-500 mr-2" size={20} />
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              className="w-full bg-white focus:outline-none"
-              required
-            >
-              <option value="">Select Role</option>
-              <option value="student">Student</option>
-              <option value="teacher">Teacher</option>
-            </select>
+          <div className="flex items-center gap-2">
+            <UserCheck className="text-gray-500" size={20} />
+            <Select value={formData.role} onValueChange={handleRoleChange}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select Role" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="student">Student</SelectItem>
+                <SelectItem value="teacher">Teacher</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         )}
-        <button
-          type="submit"
-          className="w-full p-3 bg-black text-white rounded-lg hover:bg-gray-900 transition duration-300"
-        >
+        <Button type="submit" className="w-full">
           {type === 'register' ? 'Register' : 'Login'}
-        </button>
+        </Button>
       </form>
     </div>
   );
