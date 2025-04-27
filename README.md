@@ -102,7 +102,7 @@ Licensed under the [MIT License](LICENSE).
 ---
 
 ⭐ **Feel free to star the repo if you find it helpful!**  
-📬 Reach out on [LinkedIn](https://linkedin.com/in/your-link) or [Email](mailto:you@example.com)
-```
 
->  Developed with 💛 by **Hari**
+```
+```
+ Developed with 💛 by **Hari**
